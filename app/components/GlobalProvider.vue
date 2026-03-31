@@ -28,7 +28,13 @@
 <script setup lang="ts">
 import {
   zhCN,
+  enUS,
+  jaJP,
+  koKR,
   dateZhCN,
+  dateEnUS,
+  dateJaJP,
+  dateKoKR,
   darkTheme,
   useOsTheme,
   useLoadingBar,
@@ -44,11 +50,20 @@ const colorMode = useColorMode();
 const statusStore = useStatusStore();
 
 // 站点语言
-const siteLang = computed(() =>
-  statusStore.siteLang === "zh-CN"
-    ? { locale: zhCN, date: dateZhCN }
-    : { locale: undefined, date: undefined },
-);
+const siteLang = computed(() => {
+  switch (statusStore.siteLang) {
+    case "zh-CN":
+      return { locale: zhCN, date: dateZhCN };
+    case "en":
+      return { locale: enUS, date: dateEnUS };
+    case "ja-JP":
+      return { locale: jaJP, date: dateJaJP };
+    case "ko-KR":
+      return { locale: koKR, date: dateKoKR };
+    default:
+      return { locale: zhCN, date: dateZhCN };
+  }
+});
 
 // 获取明暗模式
 const theme = computed(() => {
